@@ -72,7 +72,7 @@
 	. = ..()
 	for(var/obj/item/stock_parts/matter_bin/matterbins in component_parts)
 		research_power = matterbins.rating
-	for(var/obj/item/stock_parts/manipulator/manipulators in component_parts)
+	for(var/obj/item/stock_parts/servo/manipulators in component_parts)
 		research_gain = ((manipulators.rating * 100) / 2) //50, 100, 150, 200
 
 	//power usage is cut, not increased.
@@ -202,7 +202,7 @@
 	build_path = /obj/machinery/survey_scanner
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 1,
-		/obj/item/stock_parts/manipulator = 1,
+		/obj/item/stock_parts/servo = 1,
 		/obj/item/stock_parts/micro_laser = 1,
 		/obj/item/stack/cable_coil = 5,
 	)

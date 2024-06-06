@@ -1,7 +1,7 @@
-import { CargoCatalog } from '../../tgui/interfaces/Cargo.js';
 import { useBackend, useSharedState } from '../../tgui/backend';
-import { AnimatedNumber, Box, Button, Input, RestrictedInput, LabeledList, Section, Stack, Table, Tabs } from '../../tgui/components';
+import { AnimatedNumber, Box, Button, Input, LabeledList, RestrictedInput, Section, Stack, Table, Tabs } from '../../tgui/components';
 import { formatMoney } from '../../tgui/format';
+import { CargoCatalog } from '../../tgui/interfaces/Cargo.jsx';
 import { Window } from '../../tgui/layouts';
 
 export const VoidcrewCargo = (props, context) => {

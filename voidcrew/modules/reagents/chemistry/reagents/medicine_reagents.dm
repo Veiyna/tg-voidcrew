@@ -183,10 +183,7 @@
 	overdose_threshold = 30
 
 /datum/reagent/medicine/puce_essence/on_mob_life(mob/living/carbon/M)
-	if(prob(80))
-		M.adjustToxLoss(-1*REM, 0)
-	else
-		M.adjustCloneLoss(-1*REM, 0)
+	M.adjustToxLoss(-1*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
 		M.reagents.remove_reagent(R.type, 0.25)
 	if(holder.has_reagent(/datum/reagent/medicine/soulus))				// No, you can't chemstack with soulus dust
@@ -216,7 +213,6 @@
 /datum/reagent/medicine/chartreuse/on_mob_life(mob/living/carbon/M)		// Yes, you can chemstack with soulus dust
 	if(prob(80))
 		M.adjustToxLoss(-2*REM, 0)
-		M.adjustCloneLoss(-1*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
 		M.reagents.remove_reagent(R.type, 1)
 	M.add_atom_colour(color, TEMPORARY_COLOUR_PRIORITY)		// Changes color to chartreuse
@@ -229,6 +225,7 @@
 
 /datum/reagent/medicine/chartreuse/on_mob_end_metabolize(mob/living/M)
 	M.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, color)		// Removes temporary (not permanent) chartreuse
+	..()
 
 /datum/reagent/medicine/chartreuse/overdose_process(mob/living/M)
 	M.add_atom_colour(color, FIXED_COLOUR_PRIORITY)		// Eternal chartreuse

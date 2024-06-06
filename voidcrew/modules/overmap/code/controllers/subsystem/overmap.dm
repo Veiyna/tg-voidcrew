@@ -109,9 +109,11 @@ SUBSYSTEM_DEF(overmap)
 		else
 			overmap_turf.ChangeTurf(/turf/open/overmap)
 		var/area/old_area = get_area(overmap_turf)
-		old_area.turfs_to_uncontain += overmap_turf
+		LISTASSERTLEN(old_area.turfs_to_uncontain_by_zlevel, overmap_turf.z, list())
+		LISTASSERTLEN(overmap_area.turfs_by_zlevel, overmap_turf.z, list())
+		old_area.turfs_to_uncontain_by_zlevel[overmap_turf.z] += overmap_turf
+		overmap_area.turfs_by_zlevel[overmap_turf.z] += overmap_turf
 		overmap_area.contents += overmap_turf
-		overmap_area.contained_turfs += overmap_turf
 	overmap_area.reg_in_areas_in_z()
 	// not actually the centre but close enough
 	overmap_centre = get_turf(locate((OVERMAP_LEFT_SIDE_COORD + ((OVERMAP_SIZE - 1) / 2)) - 1, (OVERMAP_SOUTH_SIDE_COORD + ((OVERMAP_SIZE - 1) / 2)) - 1, OVERMAP_Z_LEVEL))
@@ -264,7 +266,7 @@ SUBSYSTEM_DEF(overmap)
 	if(!initial_ship)
 		CRASH("Failed to spawn initial ship.")
 
-	RegisterSignal(initial_ship, COMSIG_PARENT_QDELETING, PROC_REF(handle_initial_ship_deletion))
+	RegisterSignal(initial_ship, COMSIG_QDELETING, PROC_REF(handle_initial_ship_deletion))
 #endif
 
 /**

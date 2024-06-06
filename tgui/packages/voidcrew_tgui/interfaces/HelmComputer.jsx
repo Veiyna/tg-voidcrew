@@ -1,38 +1,42 @@
 import { useBackend } from '../../tgui/backend';
-import { Button, ByondUi, LabeledList, Section, ProgressBar, AnimatedNumber, Table} from '../../tgui/components';
+import { AnimatedNumber, Button, ByondUi, LabeledList, ProgressBar, Section, Table, Stack } from '../../tgui/components';
 import { Window } from '../../tgui/layouts';
 
-export const HelmComputer = (props, context) => {
-  const { act, data, config } = useBackend(context);
+export const HelmComputer = (props) => {
+  const { act, data } = useBackend();
   const { mapRef, isViewer } = data;
   return (
     <Window
       width={870}
       height={708}
       resizable>
-      <div className="CameraConsole__left">
         <Window.Content>
-          {!isViewer && (
+        <Stack fill>
+      <Stack.Item grow>
+      {!isViewer && (
             <ShipControlContent />
           )}
           <ShipContent />
           <SharedContent />
-        </Window.Content>
-      </div>
-      <div className="CameraConsole__right">
-        <ByondUi
-          className="CameraConsole__map"
+      </Stack.Item>
+      <Stack.Item grow={3}>
+      <ByondUi
+          height="100%"
           params={{
             id: mapRef,
             type: 'map',
           }} />
-      </div>
+      </Stack.Item>
+    </Stack>
+
+
+        </Window.Content>
     </Window>
   );
 };
 
-const SharedContent = (props, context) => {
-  const { act, data } = useBackend(context);
+const SharedContent = (props) => {
+  const { act, data } = useBackend();
   const { isViewer, integrity, shipInfo = [], otherInfo = [] } = data;
   return (
     <>
@@ -153,8 +157,8 @@ const SharedContent = (props, context) => {
 };
 
 // Content included on helms when they're controlling ships
-const ShipContent = (props, context) => {
-  const { act, data } = useBackend(context);
+const ShipContent = (props) => {
+  const { act, data } = useBackend();
   const {
     isViewer,
     engineInfo,
@@ -295,8 +299,8 @@ const ShipContent = (props, context) => {
 };
 
 // Arrow directional controls
-const ShipControlContent = (props, context) => {
-  const { act, data } = useBackend(context);
+const ShipControlContent = (props) => {
+  const { act, data } = useBackend();
   const { calibrating } = data;
   let flyable = (data.state === 'flying');
   //  DIRECTIONS const idea from Lyra as part of their Haven-Urist project

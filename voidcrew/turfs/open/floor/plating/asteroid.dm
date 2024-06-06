@@ -73,7 +73,6 @@
 	icon = 'voidcrew/icons/misc/beach.dmi'
 	icon_state = "sand"
 	base_icon_state = "sand"
-	broken_state = "sand_dug"
 
 /turf/open/misc/asteroid/sand/beach/Initialize(mapload, inherited_virtual_z)
 	. = ..()
@@ -88,7 +87,6 @@
 	icon_state = "light_sand"
 	planetary_atmos = TRUE
 	base_icon_state = "light_sand"
-	broken_state = "light_sand_dug"
 
 /turf/open/misc/asteroid/sand/beach/dense/lit
 	light_range = 2

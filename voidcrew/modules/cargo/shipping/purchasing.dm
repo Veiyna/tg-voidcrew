@@ -39,7 +39,6 @@
 			message_admins("\A [spawning_order.pack.name] ordered by [ADMIN_LOOKUPFLW(spawning_order.orderer_ckey)], paid by [bank_account_holder.synced_bank_account.account_holder] has shipped.")
 		purchases++
 
-	SSeconomy.import_total += value
 	investigate_log("[purchases] orders in this shipment, worth [value] credits. [bank_account_holder.synced_bank_account.account_balance] credits left.", INVESTIGATE_CARGO)
 
 /obj/machinery/computer/voidcrew_cargo/proc/sell()
@@ -56,7 +55,7 @@
 				continue
 			if(AM.anchored)
 				continue
-			export_item_and_contents(AM, (EXPORT_CARGO | EXPORT_CONTRABAND), dry_run = FALSE, external_report = ex)
+			export_item_and_contents(AM, dry_run = FALSE, external_report = ex)
 		bank_account_holder.synced_bank_account.shipping_containers -= containers
 		qdel(containers)
 
@@ -68,5 +67,4 @@
 			continue
 		bank_account_holder.synced_bank_account.adjust_money(ex.total_value[exports])
 
-	SSeconomy.export_total += (bank_account_holder.synced_bank_account.account_balance - presale_points)
 	investigate_log("contents sold for [bank_account_holder.synced_bank_account.account_balance - presale_points] credits. Contents: [ex.exported_atoms ? ex.exported_atoms.Join(",") + "." : "none."]", INVESTIGATE_CARGO)
